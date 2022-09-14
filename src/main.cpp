@@ -5,6 +5,7 @@
 #include <proc/Hand.hpp>
 #include <proc/ForkLift.hpp>
 #include <proc/Solenoid.hpp>
+#include <proc/Arm.hpp>
 
 class MainMachine : public ssr2::Machine {
 public:
@@ -49,9 +50,11 @@ void setup() {
     Serial.begin(115200);
     app.addProcess(new proc::PS4Log());
     app.addProcess(new proc::LowerBody());
-    app.addProcess(new proc::Hand());
+    proc::Hand *hand = new proc::Hand();
+    app.addProcess(hand);
     app.addProcess(new proc::ForkLift());
-    app.addProcess(new proc::Solenoid());
+    app.addProcess(new proc::Solenoid(hand));
+    app.addProcess(new proc::Arm(hand));
     app.begin();
 }
 
