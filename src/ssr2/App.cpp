@@ -12,8 +12,20 @@ void ssr2::App::begin() noexcept {
 
 void ssr2::App::update() noexcept {
     _machine->update();
+    LimitedVector<Process *, 64> priorProcesses;
     for (auto process : _processes) {
-        if (static_cast<char>(process->status) == static_cast<char>(ProcessStatus::running)) {
+        if (process->status == ProcessStatus::runningPrior) {
+            priorProcesses.push_back(process);
+        }
+    }
+    if (priorProcesses.size() > 0) {
+        for (auto process : priorProcesses) {
+            process->update(_machine);
+        }
+        return;
+    }
+    for (auto process : _processes) {
+        if (process->status == ProcessStatus::running) {
             process->update(_machine);
         }
     }
