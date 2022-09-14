@@ -6,6 +6,8 @@
 #include <proc/ForkLift.hpp>
 #include <proc/Solenoid.hpp>
 #include <proc/Arm.hpp>
+#include <proc/AutoForward.hpp>
+#include <proc/Systemctl.hpp>
 
 class MainMachine : public ssr2::Machine {
 public:
@@ -55,6 +57,8 @@ void setup() {
     app.addProcess(new proc::ForkLift());
     app.addProcess(new proc::Solenoid(hand));
     app.addProcess(new proc::Arm(hand));
+    app.addProcess(new proc::AutoForward());
+    app.addProcess(new proc::Systemctl());
     app.begin();
 }
 
