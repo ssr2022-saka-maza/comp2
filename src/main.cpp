@@ -8,6 +8,7 @@
 #include <proc/Arm.hpp>
 #include <proc/AutoForward.hpp>
 #include <proc/Systemctl.hpp>
+#include <proc/AutoReload.hpp>
 
 class MainMachine : public ssr2::Machine {
 public:
@@ -59,6 +60,7 @@ void setup() {
     app.addProcess(new proc::Arm(hand));
     app.addProcess(new proc::AutoForward());
     app.addProcess(new proc::Systemctl());
+    app.addProcess(new proc::AutoReload());
     app.begin();
 }
 
