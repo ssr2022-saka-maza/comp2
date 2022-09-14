@@ -2,15 +2,12 @@
 
 void proc::PS4Log::begin(ssr2::Machine *machine) {
     Process::status = ssr2::ProcessStatus::running;
-    #ifdef SSR_VERBOSE
-    Serial.println(F("[proc::PS4Log] begin"));
-    #endif /* SSR_VERBOSE */
 }
 
 void proc::PS4Log::update(ssr2::Machine *machine) {
-    #ifdef SSR_VERBOSE
-    Serial.print(F("PS4Log process"));
-    #endif /* SSR_VERBOSE */
+    #ifdef proc_verbose
+    Serial.print(F("[proc::PS4Log] update\n"));
+    #endif /* proc_verbose */
     if (machine->ps4.connected()) {
         const ssr2::PS4Value &value = machine->currentPS4Value();
         char log[256] = "";

@@ -24,14 +24,39 @@ void proc::Solenoid::begin(ssr2::Machine *machine) {
 }
 
 void proc::Solenoid::update(ssr2::Machine *machine) {
+    #ifdef proc_verbose
+    char buffer[256] = "";
+    char *ptr = buffer;
+    ptr += snprintf_P(ptr, 200, PSTR("[proc::Solenoid] "));
+    #endif /* proc_verbose */
     const ssr2::PS4Value &value = machine->currentPS4Value();
-    if (!value.circle) return;
+    if (!value.circle) {
+        // ソレノイドを発射しない
+        #ifdef proc_verbose
+        ptr += snprintf_P(ptr, 200, PSTR("do nothing"));
+        #endif /* proc_verbose */
+        goto end;
+    }
     _hand->status = ssr2::ProcessStatus::stopped;
+    #ifdef proc_verbose
+    ptr += snprintf_P(ptr, 200, PSTR("stop hand"));
+    #endif /* proc_verbose */
     if (_canFire(machine)) {
         machine->solenoid.fire();
+        _hand->status = ssr2::ProcessStatus::running;
+        #ifdef proc_verbose
+        ptr += snprintf_P(ptr, 200, PSTR(", fire solenoid"));
+        #endif /* proc_verbose */
     } else {
         // 発射できないので、まずはハンドを開く
         int16_t handAngle = machine->hand.read();
         machine->hand.write(handAngle + 3);
+        #ifdef proc_verbose
+        ptr += snprintf_P(ptr, 200, PSTR(", open hand"));
+        #endif /* proc_verbose */
     }
+end:
+    #ifdef proc_verbose
+    Serial.println(buffer);
+    #endif /* proc_verbose */
 }

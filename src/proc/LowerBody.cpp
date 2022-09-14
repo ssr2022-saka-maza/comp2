@@ -16,7 +16,7 @@ void proc::LowerBody::update(ssr2::Machine *machine) {
     float x = _mapPower(value.lstick.y);
     float y = _mapPower(value.lstick.x);
     float r = _mapPower(value.rstick.x);
-    #ifdef SSR_VERBOSE
+    #ifdef proc_verbose
     char buffer[256] = "";
     char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::LowerBody] twist "));
@@ -26,6 +26,6 @@ void proc::LowerBody::update(ssr2::Machine *machine) {
     ptr[0] = ','; ptr[1] = ' '; ptr += 2;
     dtostrf(r, 6, 2, ptr); ptr += 6;
     Serial.println(buffer);
-    #endif /* SSR_VERBOSE */
+    #endif /* proc_verbose */
     machine->lowerBody.twist(x, y, r);
 }
