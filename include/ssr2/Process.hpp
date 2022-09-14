@@ -14,7 +14,7 @@ namespace ssr2 {
 
         explicit Process() noexcept;
 
-        virtual void begin() = 0;
+        virtual void begin(Machine *machine) = 0;
         virtual void update(Machine *machine) = 0;
     }; // class Process
 } // namespace ssr2

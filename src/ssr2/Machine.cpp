@@ -1,5 +1,3 @@
-#pragma once
-
 #include "ssr2/Machine.hpp"
 
 ssr2::Machine::Machine(
