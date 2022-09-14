@@ -27,11 +27,11 @@ void ssr2::LowerBody::_setPowers_raw(float v1, float v2, float v3) {
     _motor1.write(p1);
     _motor2.write(p2);
     _motor3.write(p3);
-    #ifdef SSR_VERBOSE
+    #ifdef ssr2_verbose
     char buffer[256] = "";
     snprintf_P(buffer, 255, PSTR("[ssr2::LowerBody] set motor powers as %4d, %4d, %4d\n"), p1, p2, p3);
     Serial.print(buffer);
-    #endif /* SSR_VERBOSE */
+    #endif /* ssr2_verbose */
 }
 
 void ssr2::LowerBody::_setPowers_normalized(float v1, float v2, float v3) {

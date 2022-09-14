@@ -19,6 +19,9 @@ void ssr2::Solenoid::update() noexcept {
 void ssr2::Solenoid::fire() noexcept {
     _pin.write(true);
     _fired = true;
+    #ifdef ssr2_verbose
+    Serial.println(F("[ssr2::Solenoid] fired"));
+    #endif /* ssr2_verbose */
 }
 
 bool ssr2::Solenoid::isFired() const noexcept {

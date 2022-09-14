@@ -13,7 +13,7 @@ uint16_t ssr2::MirrorServo::attach(uint8_t pin1, uint8_t pin2) {
 }
 
 void ssr2::MirrorServo::write(int16_t value) {
-    #ifdef SSR_VERBOSE
+    #ifdef ssr2_verbose
     int16_t value2 = 180 - value;
     _servo1.write(value);
     _servo2.write(value2);
@@ -22,7 +22,7 @@ void ssr2::MirrorServo::write(int16_t value) {
     #else
     _servo1.write(value);
     _servo2.write(180 - value);
-    #endif /* SSR_VERBOSE */
+    #endif /* ssr2_verbose */
 }
 
 int16_t ssr2::MirrorServo::read() {

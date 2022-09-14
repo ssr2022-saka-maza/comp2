@@ -8,6 +8,11 @@ void ssr2::DigitalOut::begin() {
 
 void ssr2::DigitalOut::write(bool value) {
     digitalWrite(_pin, value);
+    #ifdef ssr2_verbose
+    char buffer[256] = "";
+    snprintf_P(buffer, 255, PSTR("[ssr2::DigitalOut] set pin %d as %d\n"), _pin, value);
+    Serial.print(buffer);
+    #endif /* ssr2_verbose */
 }
 
 ssr2::DigitalOut& ssr2::DigitalOut::operator=(bool value) {
