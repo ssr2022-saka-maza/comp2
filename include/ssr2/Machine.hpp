@@ -39,6 +39,7 @@ namespace ssr2 {
 
         virtual void begin() noexcept = 0;
         void update() noexcept;
+        void reset() noexcept;
 
         bool isPS4Connected() const noexcept;
         const PS4Value & currentPS4Value() const noexcept;

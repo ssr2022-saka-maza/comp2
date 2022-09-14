@@ -49,5 +49,14 @@ namespace ssr2 {
                 _cycled = true;
             }
         }
+
+        void reset() noexcept {
+            _index = 0;
+            _cycled = false;
+            _values_sum = 0;
+            for (uint16_t i = 0; i < capacity; i++) {
+                _values[i] = 0;
+            }
+        }
     }; // class MovingAverage
 } // namespace ssr2

@@ -23,6 +23,13 @@ void ssr2::Machine::update() noexcept {
     solenoid.update();
 }
 
+void ssr2::Machine::reset() noexcept {
+    lowerBody.reset();
+    forkLift.reset();
+    hand.reset();
+    arm.reset();
+}
+
 bool ssr2::Machine::isPS4Connected() const noexcept {
     return ps4.connected();
 }
