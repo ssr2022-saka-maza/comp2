@@ -1,7 +1,11 @@
 #include "ssr2/ConstrainedMServo.hpp"
 
 ssr2::ConstrainedMServo::ConstrainedMServo(int16_t minAngle, int16_t maxAngle)
-: MirrorServo(), minAngle(minAngle), maxAngle(maxAngle) {}
+: MirrorServo(), _initialAngle(0), minAngle(minAngle), maxAngle(maxAngle) {}
+
+void ssr2::ConstrainedMServo::reset() noexcept {
+    write(_initialAngle);
+}
 
 void ssr2::ConstrainedMServo::begin(int16_t angle) {
     MirrorServo::write(angle);

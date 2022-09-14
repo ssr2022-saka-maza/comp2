@@ -64,6 +64,7 @@ namespace ssr2 {
 
     public:
         void setPowers(float v1, float v2, float v3) noexcept;
+        void reset() noexcept;
         void twist(float v_x, float v_y, float v_theta) noexcept;
         inline void parallel(float v_x, float v_y) noexcept;
         inline void rotate(float v_theta) noexcept;

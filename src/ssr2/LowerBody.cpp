@@ -49,6 +49,10 @@ void ssr2::LowerBody::setPowers(float v1, float v2, float v3) {
     }
 }
 
+void ssr2::LowerBody::reset() {
+    setPowers(0, 0, 0);
+}
+
 void ssr2::LowerBody::twist(float v_x, float v_y, float v_theta) {
     float v1 = _dir1.dot(v_x, v_y) + v_theta;
     float v2 = _dir2.dot(v_x, v_y) + v_theta;
