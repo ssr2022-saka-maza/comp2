@@ -17,13 +17,17 @@ bool proc::Solenoid::_canFire(ssr2::Machine *machine) const noexcept {
     return false;
 }
 
+proc::Solenoid::Solenoid(Hand *hand) noexcept : _hand(hand) {}
+
 void proc::Solenoid::begin(ssr2::Machine *machine) {
     status = ssr2::ProcessStatus::running;
 }
 
 void proc::Solenoid::update(ssr2::Machine *machine) {
     const ssr2::PS4Value &value = machine->currentPS4Value();
-    if (value.circle && _canFire(machine)) {
+    if (!value.circle) return;
+    _hand->status = ssr2::ProcessStatus::stopped;
+    if (_canFire(machine)) {
         machine->solenoid.fire();
     } else {
         // 発射できないので、まずはハンドを開く
