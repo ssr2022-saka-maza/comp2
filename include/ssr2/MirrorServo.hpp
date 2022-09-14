@@ -19,7 +19,7 @@ namespace ssr2 {
         ~MirrorServo() = default;
 
         uint16_t attach(uint8_t pin1, uint8_t pin2) noexcept;
-        void write(uint8_t value) noexcept;
+        void write(int16_t value) noexcept;
         int16_t read() noexcept;
     }; // class MirrorServo
 } // namespace ssr2

@@ -12,9 +12,9 @@ uint16_t ssr2::MirrorServo::attach(uint8_t pin1, uint8_t pin2) {
     return (_servo2.attach(pin2) << 8) | _servo1.attach(pin1);
 }
 
-void ssr2::MirrorServo::write(uint8_t value) {
+void ssr2::MirrorServo::write(int16_t value) {
     #ifdef SSR_VERBOSE
-    uint8_t value2 = 180 - value;
+    int16_t value2 = 180 - value;
     _servo1.write(value);
     _servo2.write(value2);
     char buffer[256] = "";

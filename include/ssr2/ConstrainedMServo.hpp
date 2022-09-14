@@ -7,10 +7,10 @@
 namespace ssr2 {
     class ConstrainedMServo : public MirrorServo {
     public:
-        const uint8_t minAngle, maxAngle;
+        const int16_t minAngle, maxAngle;
 
-        explicit ConstrainedMServo(uint8_t minAngle = 0, uint8_t maxAngle = 180);
-        void begin(uint8_t angle = 0) noexcept;
-        void write(uint8_t angle) noexcept;
+        explicit ConstrainedMServo(int16_t minAngle = 0, int16_t maxAngle = 180);
+        void begin(int16_t angle = 0) noexcept;
+        void write(int16_t angle) noexcept;
     }; // class ConstrainedMServo
 } // namespace ssr2
