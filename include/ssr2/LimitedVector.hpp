@@ -56,5 +56,25 @@ namespace ssr2 {
         bool empty() const noexcept {
             return _size == 0;
         }
+
+        bool full() const noexcept {
+            return _size == N;
+        }
+
+        T * begin() noexcept {
+            return _data;
+        }
+
+        const T * begin() const noexcept {
+            return _data;
+        }
+
+        T * end() noexcept {
+            return _data + _size;
+        }
+
+        const T * end() const noexcept {
+            return _data + _size;
+        }
     }; // class LimitedVector
 } // namespace ssr2
