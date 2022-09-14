@@ -19,6 +19,7 @@ ssr2::Machine::Machine(
 void ssr2::Machine::update() noexcept {
     ps4.update();
     ps4.read(&_ps4Value);
+    hand.update();
     solenoid.update();
 }
 

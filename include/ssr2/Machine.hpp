@@ -3,12 +3,12 @@
 #include <Arduino.h>
 #include "ssr2/LowerBody.hpp"
 #include "ssr2/ConstrainedMServo.hpp"
+#include "ssr2/Hand.hpp"
 #include "ssr2/Solenoid.hpp"
 #include "ssr2/PS4USB.hpp"
 
 namespace ssr2 {
     using ForkLift = ConstrainedMServo;
-    using Hand     = ConstrainedMServo;
     using Arm      = ConstrainedMServo;
 
     class Machine {
