@@ -1,7 +1,7 @@
 #pragma once
 
 namespace ssr2 {
-    enum class ProcessStatus {
+    enum class ProcessStatus : char {
         running,
         stopped,
     }; // enum class ProcessStatus
