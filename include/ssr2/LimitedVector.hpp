@@ -1,0 +1,60 @@
+#pragma once
+
+#include <Arduino.h>
+
+namespace ssr2 {
+    template<typename T, uint32_t N>
+    class LimitedVector {
+    private:
+        T _data[N] = {};
+        uint32_t _size = 0;
+
+    public:
+        static constexpr uint32_t capacity = N;
+
+        explicit LimitedVector() {}
+
+        LimitedVector(const LimitedVector &) = delete;
+        LimitedVector & operator=(const LimitedVector &) = delete;
+        LimitedVector(LimitedVector&&) = delete;
+        LimitedVector & operator=(LimitedVector&&) = delete;
+        ~LimitedVector() = default;
+
+        void push_back(const T &value) noexcept {
+            if (_size < N) {
+                _data[_size++] = value;
+            }
+        }
+
+        void push_back(T &&value) noexcept {
+            if (_size < N) {
+                _data[_size++] = value;
+            }
+        }
+
+        void pop_back() noexcept {
+            if (_size > 0) {
+                --_size;
+            }
+        }
+
+        void clear() noexcept {
+            _size = 0;
+        }
+        T & operator[](uint32_t index) noexcept {
+            return _data[index];
+        }
+
+        const T & operator[](uint32_t index) const noexcept {
+            return _data[index];
+        }
+
+        uint32_t size() const noexcept {
+            return _size;
+        }
+
+        bool empty() const noexcept {
+            return _size == 0;
+        }
+    }; // class LimitedVector
+} // namespace ssr2
