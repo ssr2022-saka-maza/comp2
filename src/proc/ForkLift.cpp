@@ -6,8 +6,15 @@ void proc::ForkLift::begin(ssr2::Machine *machine) {
 
 void proc::ForkLift::update(ssr2::Machine *machine) {
     const ssr2::PS4Value &value = machine->currentPS4Value();
-    uint8_t angle = machine->forkLift.read();
-    angle += value.up - value.down;
+    int16_t angle = machine->forkLift.read();
+    int16_t delta = value.up - value.down;
+    if (delta == 0) {
+        #ifdef proc_verbose
+        Serial.println(F("[proc::ForkLift] no change"));
+        #endif /* proc_verbose */
+        return;
+    }
+    angle += delta;
     machine->forkLift.write(angle);
     #ifdef proc_verbose
     char buffer[256] = "";

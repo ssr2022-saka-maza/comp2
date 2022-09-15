@@ -12,11 +12,11 @@ void ssr2::ConstrainedMServo::begin(int16_t angle) {
 }
 
 void ssr2::ConstrainedMServo::write(int16_t angle) {
-    int16_t a = constrain(angle, minAngle, maxAngle);
+    int16_t a = max(minAngle, min(angle, maxAngle));
+    MirrorServo::write(a);
     #ifdef ssr2_verbose
     char buffer[256] = "";
     snprintf_P(buffer, 255, PSTR("[ssr2::ConstrainedMServo] set angle as %d\n"), a);
     Serial.print(buffer);
     #endif /* ssr2_verbose */
-    MirrorServo::write(a);
 }

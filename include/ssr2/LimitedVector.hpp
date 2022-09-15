@@ -6,19 +6,22 @@ namespace ssr2 {
     template<typename T, uint32_t N>
     class LimitedVector {
     private:
-        T _data[N] = {};
+        T *_data;
         uint32_t _size = 0;
 
     public:
         static constexpr uint32_t capacity = N;
 
-        explicit LimitedVector() {}
+        explicit LimitedVector() : _data(new T[N]{}) {}
 
         LimitedVector(const LimitedVector &) = delete;
         LimitedVector & operator=(const LimitedVector &) = delete;
         LimitedVector(LimitedVector&&) = delete;
         LimitedVector & operator=(LimitedVector&&) = delete;
-        ~LimitedVector() = default;
+
+        ~LimitedVector() {
+            delete[] _data;
+        }
 
         void push_back(const T &value) noexcept {
             if (_size < N) {

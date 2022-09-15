@@ -27,7 +27,7 @@ namespace ssr2 {
             uint8_t dir1, uint8_t pwm1,
             uint8_t dir2, uint8_t pwm2,
             uint8_t dir3, uint8_t pwm3,
-            uint16_t movAveCapacity = 64
+            uint16_t movAveCapacity = 32
         );
 
         /**
