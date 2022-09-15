@@ -10,7 +10,7 @@ bool proc::Solenoid::_canFire(ssr2::Machine *machine) const noexcept {
         return true;
     }
     int handAngle = machine->hand.read();
-    if (handAngle != -1 && handAngle >= 75) {
+    if (handAngle != -1 && handAngle >= 80) {
         // ハンドが十分に弾道から離れた位置にある
         return true;
     }
@@ -51,7 +51,7 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         _requested = true;
         _hand->status = ssr2::ProcessStatus::stopped;
         int16_t handAngle = machine->hand.read();
-        machine->hand.write(handAngle + 3);
+        machine->hand.write(handAngle + 1);
         #ifdef proc_verbose
         ptr += snprintf_P(ptr, 200, PSTR("stop hand process, open hand"));
         #endif /* proc_verbose */

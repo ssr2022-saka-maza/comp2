@@ -30,9 +30,9 @@ public:
         forkLift.attach(23, 25);
         hand.attach(27, 29);
         arm.attach(31, 33);
-        forkLift.begin(90);
+        forkLift.begin(0);
         hand.begin(70);
-        arm.begin(100);
+        arm.begin(140);
         if (ps4.begin() == -1) {
             Serial.println("PS4USB::begin() failed.");
         }
