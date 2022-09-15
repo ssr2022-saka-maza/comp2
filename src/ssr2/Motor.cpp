@@ -12,7 +12,7 @@ void ssr2::Motor::write(int16_t value) {
     _pwm = abs(value);
     #ifdef ssr2_verbose
     char buffer[256] = "";
-    snprintf_P(buffer, 255, PSTR("[ssr2::Motor] set power %d as %d\n"), value);
+    snprintf_P(buffer, 255, PSTR("[ssr2::Motor] set power as %d\n"), value);
     Serial.print(buffer);
     #endif /* ssr2_verbose */
 }

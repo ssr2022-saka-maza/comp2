@@ -7,6 +7,7 @@ namespace proc {
     class Solenoid : public ssr2::Process {
     private:
         Hand *_hand;
+        bool _requested;
 
         bool _canFire(ssr2::Machine *machine) const noexcept;
 

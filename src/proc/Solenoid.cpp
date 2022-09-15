@@ -17,7 +17,7 @@ bool proc::Solenoid::_canFire(ssr2::Machine *machine) const noexcept {
     return false;
 }
 
-proc::Solenoid::Solenoid(Hand *hand) noexcept : _hand(hand) {}
+proc::Solenoid::Solenoid(Hand *hand) noexcept : _hand(hand), _requested(false) {}
 
 void proc::Solenoid::begin(ssr2::Machine *machine) {
     status = ssr2::ProcessStatus::running;
@@ -30,7 +30,7 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Solenoid] "));
     #endif /* proc_verbose */
     const ssr2::PS4Value &value = machine->currentPS4Value();
-    if (!value.circle) {
+    if (!value.circle && !_requested) {
         // ソレノイドを発射しない
         #ifdef proc_verbose
         ptr += snprintf_P(ptr, 200, PSTR("do nothing"));
@@ -39,22 +39,21 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         return;
         #endif /* proc_verbose */
     }
-    _hand->status = ssr2::ProcessStatus::stopped;
-    #ifdef proc_verbose
-    ptr += snprintf_P(ptr, 200, PSTR("stop hand"));
-    #endif /* proc_verbose */
     if (_canFire(machine)) {
         machine->solenoid.fire();
         _hand->status = ssr2::ProcessStatus::running;
+        _requested = false;
         #ifdef proc_verbose
-        ptr += snprintf_P(ptr, 200, PSTR(", fire solenoid"));
+        ptr += snprintf_P(ptr, 200, PSTR("restart hand process, fire solenoid"));
         #endif /* proc_verbose */
     } else {
         // 発射できないので、まずはハンドを開く
+        _requested = true;
+        _hand->status = ssr2::ProcessStatus::stopped;
         int16_t handAngle = machine->hand.read();
         machine->hand.write(handAngle + 3);
         #ifdef proc_verbose
-        ptr += snprintf_P(ptr, 200, PSTR(", open hand"));
+        ptr += snprintf_P(ptr, 200, PSTR("stop hand process, open hand"));
         #endif /* proc_verbose */
     }
     #ifdef proc_verbose

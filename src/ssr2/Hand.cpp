@@ -17,6 +17,9 @@ void ssr2::Hand::begin(int16_t angle) {
 }
 
 void ssr2::Hand::update() {
+    #ifdef ssr2_verbose
+    Serial.println(F("[ssr2::Hand] update"));
+    #endif /* ssr2_verbose */
     ConstrainedMServo::write(_angle);
     _angle = ConstrainedMServo::read();
 }

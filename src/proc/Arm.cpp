@@ -16,7 +16,7 @@ void proc::Arm::update(ssr2::Machine *machine) {
     machine->arm.write(angle + _dAngle);
     #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr += buffer;
+    char *ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Arm] set angle as %d"), angle);
     #endif /* proc_verbose */
     // ハンドの干渉チェック
