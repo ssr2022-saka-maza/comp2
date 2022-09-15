@@ -20,6 +20,8 @@ void ssr2::Hand::update() {
     ConstrainedMServo::write(_angle);
     _angle = ConstrainedMServo::read();
     #ifdef ssr2_verbose
-    Serial.println(F("[ssr2::Hand] update"));
+    char buffer[256] = "";
+    snprintf_P(buffer, 200, PSTR("[ssr2::Hand] set angle as %d\n"), _angle);
+    Serial.print(buffer);
     #endif /* ssr2_verbose */
 }

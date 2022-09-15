@@ -40,8 +40,8 @@ public:
     }
 };
 
-ssr2::LowerBody lowerBody(6, 7, 4, 5, 2, 3);
-ssr2::Solenoid  solenoid(A8);
+ssr2::LowerBody lowerBody(6, 7, 4, 5, 2, 3, 64);
+ssr2::Solenoid  solenoid(A8, 100);
 ssr2::ForkLift  forkLift(0, 180);
 ssr2::Hand      hand(70, 110);
 ssr2::Arm       arm(0, 150);

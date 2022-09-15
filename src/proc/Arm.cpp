@@ -20,7 +20,7 @@ void proc::Arm::update(ssr2::Machine *machine) {
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Arm] set angle as %d"), angle);
     #endif /* proc_verbose */
     // ハンドの干渉チェック
-    if ((_liftAngle - angle) * _dAngle >= 0) {
+    if ((_liftAngle - angle) * _dAngle > 0) {
         // 昇降機構に干渉しそうな方向に動いている
         _hand->status = ssr2::ProcessStatus::stopped;
         int16_t handAngle = machine->hand.read();
@@ -29,13 +29,16 @@ void proc::Arm::update(ssr2::Machine *machine) {
         #endif /* proc_verbose */
         if (handAngle != -1 && handAngle > 80) {
             // 干渉しそう
-            machine->hand.write(handAngle - 3);
+            machine->hand.write(handAngle - 5);
             #ifdef proc_verbose
             ptr += snprintf_P(ptr, 200, PSTR(", set hand angle as %d"), handAngle - 3);
             #endif /* proc_verbose */
         }
     } else {
         _hand->status = ssr2::ProcessStatus::running;
+        #ifdef proc_verbose
+        ptr += snprintf_P(ptr, 200, PSTR(", run hand process"));
+        #endif /* proc_verbose */
     }
     #ifdef proc_verbose
     Serial.println(buffer);
