@@ -8,6 +8,7 @@ namespace ssr2 {
     private:
         DigitalOut _pin;
         bool _fired;
+        uint64_t _lastFiredTime;
 
     public:
         const uint16_t duration;

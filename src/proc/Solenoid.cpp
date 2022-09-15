@@ -34,8 +34,10 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         // ソレノイドを発射しない
         #ifdef proc_verbose
         ptr += snprintf_P(ptr, 200, PSTR("do nothing"));
-        #endif /* proc_verbose */
         goto end;
+        #else  /* proc_verbose */
+        return;
+        #endif /* proc_verbose */
     }
     _hand->status = ssr2::ProcessStatus::stopped;
     #ifdef proc_verbose
@@ -55,8 +57,8 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         ptr += snprintf_P(ptr, 200, PSTR(", open hand"));
         #endif /* proc_verbose */
     }
-end:
     #ifdef proc_verbose
+    end:
     Serial.println(buffer);
     #endif /* proc_verbose */
 }
