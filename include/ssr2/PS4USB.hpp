@@ -17,25 +17,27 @@
 #include "ssr2/PS4Value.hpp"
 
 namespace ssr2 {
-    class PS4USB {
-    private:
-        USB _usb;
-        ::PS4USB _ps4;
 
-    public:
-        explicit PS4USB();
-        ~PS4USB() = default;
+class PS4USB {
+private:
+    USB _usb;
+    ::PS4USB _ps4;
 
-        PS4USB(const PS4USB &) = delete;
-        PS4USB & operator=(const PS4USB &) = delete;
-        PS4USB(PS4USB&&) = delete;
-        PS4USB & operator=(PS4USB&&) = delete;
+public:
+    explicit PS4USB();
+    ~PS4USB() = default;
 
-        int begin();
-        void update();
-        bool connected();
+    PS4USB(const PS4USB &) = delete;
+    PS4USB &operator=(const PS4USB &) = delete;
+    PS4USB(PS4USB &&) = delete;
+    PS4USB &operator=(PS4USB &&) = delete;
 
-        void read(ssr2::PS4Value * output);
-        PS4Value * read();
-    }; // class PS4USB
+    int begin();
+    void update();
+    bool connected();
+
+    void read(ssr2::PS4Value *output);
+    PS4Value *read();
+}; // class PS4USB
+
 } // namespace ssr2

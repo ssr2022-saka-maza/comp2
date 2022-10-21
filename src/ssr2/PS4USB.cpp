@@ -15,7 +15,8 @@ bool ssr2::PS4USB::connected() {
 }
 
 void ssr2::PS4USB::read(ssr2::PS4Value *output) {
-    if (output == nullptr || output == NULL) return;
+    if (output == nullptr || output == NULL)
+        return;
     output->lstick.x = _ps4.getAnalogHat(LeftHatX);
     output->lstick.y = _ps4.getAnalogHat(LeftHatY);
     output->rstick.x = _ps4.getAnalogHat(RightHatX);
@@ -56,8 +57,8 @@ void ssr2::PS4USB::read(ssr2::PS4Value *output) {
 }
 
 ssr2::PS4Value *ssr2::PS4USB::read() {
-    ssr2::PS4Value * value = new ssr2::PS4Value(
-        _ps4.getAnalogHat(LeftHatX),  _ps4.getAnalogHat(LeftHatY),
+    ssr2::PS4Value *value = new ssr2::PS4Value(
+        _ps4.getAnalogHat(LeftHatX), _ps4.getAnalogHat(LeftHatY),
         _ps4.getAnalogHat(RightHatX), _ps4.getAnalogHat(RightHatY),
         _ps4.getButtonPress(UP),
         _ps4.getButtonPress(RIGHT),
@@ -79,8 +80,7 @@ ssr2::PS4Value *ssr2::PS4USB::read() {
         _ps4.isTouching(0),
         0, 0,
         _ps4.isTouching(1),
-        0, 0
-    );
+        0, 0);
     if (value->finger1Touch) {
         value->finger1Pos.x = _ps4.getX(0);
         value->finger1Pos.y = _ps4.getY(0);

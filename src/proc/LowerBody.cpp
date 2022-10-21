@@ -12,20 +12,34 @@ void proc::LowerBody::begin(ssr2::Machine *machine) {
 }
 
 void proc::LowerBody::update(ssr2::Machine *machine) {
+    ssr2::LowerBody *lowerBody = machine->lowerBody_();
+    if (lowerBody == nullptr || lowerBody == NULL) {
+#ifdef proc_verbose
+        Serial.print("[proc::LowerBody] machine->lowerBody_() is null");
+#endif /* proc_verbose */
+        return;
+    }
     const ssr2::PS4Value &value = machine->currentPS4Value();
     float x = _mapPower(value.lstick.y);
     float y = _mapPower(value.lstick.x);
     float r = _mapPower(value.rstick.x);
-    #ifdef proc_verbose
+#ifdef proc_verbose
     char buffer[256] = "";
-    char * ptr = buffer;
+    char *ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::LowerBody] twist "));
-    dtostrf(x, 6, 2, ptr); ptr += 6;
-    ptr[0] = ','; ptr[1] = ' '; ptr += 2;
-    dtostrf(y, 6, 2, ptr); ptr += 6;
-    ptr[0] = ','; ptr[1] = ' '; ptr += 2;
-    dtostrf(r, 6, 2, ptr); ptr += 6;
+    dtostrf(x, 6, 2, ptr);
+    ptr += 6;
+    ptr[0] = ',';
+    ptr[1] = ' ';
+    ptr += 2;
+    dtostrf(y, 6, 2, ptr);
+    ptr += 6;
+    ptr[0] = ',';
+    ptr[1] = ' ';
+    ptr += 2;
+    dtostrf(r, 6, 2, ptr);
+    ptr += 6;
     Serial.println(buffer);
-    #endif /* proc_verbose */
-    machine->lowerBody.twist(x, y, r);
+#endif /* proc_verbose */
+    lowerBody->twist(x, y, r);
 }

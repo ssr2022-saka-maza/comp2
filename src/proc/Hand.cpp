@@ -5,13 +5,20 @@ void proc::Hand::begin(ssr2::Machine *machine) {
 }
 
 void proc::Hand::update(ssr2::Machine *machine) {
+    ssr2::Hand *hand = machine->hand_();
+    if (hand == nullptr || hand == NULL) {
+#ifdef proc_verbose
+        Serial.println(F("[proc::Hand] machine->hand_ is null"));
+#endif /* proc_verbose */
+        return;
+    }
     const ssr2::PS4Value &value = machine->currentPS4Value();
-    int16_t angle = machine->hand.read();
+    int16_t angle = hand->read();
     angle += value.l1 - value.r1;
-    machine->hand.write(angle);
-    #ifdef proc_verbose
+    hand->write(angle);
+#ifdef proc_verbose
     char buffer[256] = "";
     snprintf_P(buffer, 200, PSTR("[proc::Hand] set angle as %d\n"), angle);
     Serial.print(buffer);
-    #endif /* proc_verbose */
+#endif /* proc_verbose */
 }

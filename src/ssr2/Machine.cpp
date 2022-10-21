@@ -1,39 +1,30 @@
 #include "ssr2/Machine.hpp"
 
-ssr2::Machine::Machine(
-    LowerBody &lowerBody,
-    Solenoid  &solenoid,
-    ForkLift  &forkLift,
-    Hand      &hand,
-    Arm       &arm,
-    PS4USB    &ps4
-) : _ps4Value(),
-    lowerBody(lowerBody),
-    solenoid(solenoid),
-    forkLift(forkLift),
-    hand(hand),
-    arm(arm),
-    ps4(ps4)
-{}
+ssr2::Machine::Machine() : _ps4Value() {}
 
 void ssr2::Machine::update() noexcept {
-    ps4.update();
-    ps4.read(&_ps4Value);
-    hand.update();
-    solenoid.update();
+    ssr2::PS4USB *ps4 = ps4_();
+    ps4->update();
+    ps4->read(&_ps4Value);
+    hand_()->update();
+    solenoid_()->update();
 }
 
 void ssr2::Machine::reset() noexcept {
-    lowerBody.reset();
-    forkLift.reset();
-    hand.reset();
-    arm.reset();
+    lowerBody_()->reset();
+    forkLift_()->reset();
+    hand_()->reset();
+    arm_()->reset();
 }
 
-bool ssr2::Machine::isPS4Connected() const noexcept {
-    return ps4.connected();
+bool ssr2::Machine::isPS4Connected() noexcept {
+    ssr2::PS4USB *ps4 = ps4_();
+    if (ps4 == nullptr || ps4 == NULL) {
+        return false;
+    }
+    return ps4->connected();
 }
 
-const ssr2::PS4Value & ssr2::Machine::currentPS4Value() const noexcept {
+const ssr2::PS4Value &ssr2::Machine::currentPS4Value() const noexcept {
     return _ps4Value;
 }

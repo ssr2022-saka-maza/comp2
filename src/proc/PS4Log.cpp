@@ -5,10 +5,10 @@ void proc::PS4Log::begin(ssr2::Machine *machine) {
 }
 
 void proc::PS4Log::update(ssr2::Machine *machine) {
-    #ifdef proc_verbose
+#ifdef proc_verbose
     Serial.print(F("[proc::PS4Log] update\n"));
-    #endif /* proc_verbose */
-    if (machine->ps4.connected()) {
+#endif /* proc_verbose */
+    if (machine->isPS4Connected()) {
         const ssr2::PS4Value &value = machine->currentPS4Value();
         char log[256] = "";
         sprintf_P(
@@ -20,8 +20,7 @@ void proc::PS4Log::update(ssr2::Machine *machine) {
             value.triangle, value.circle, value.cross, value.square,
             value.ps, value.share, value.options,
             value.l1, value.l2, value.l3,
-            value.r1, value.r2, value.r3
-        );
+            value.r1, value.r2, value.r3);
         Serial.print(log);
     } else {
         Serial.println(F("PS4 is not connected"));

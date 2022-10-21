@@ -1,47 +1,43 @@
 #pragma once
 
-#include <Arduino.h>
-#include "ssr2/LowerBody.hpp"
 #include "ssr2/ConstrainedMServo.hpp"
 #include "ssr2/Hand.hpp"
-#include "ssr2/Solenoid.hpp"
+#include "ssr2/LowerBody.hpp"
 #include "ssr2/PS4USB.hpp"
+#include "ssr2/Solenoid.hpp"
+#include <Arduino.h>
 
 namespace ssr2 {
-    using ForkLift = ConstrainedMServo;
-    using Arm      = ConstrainedMServo;
 
-    class Machine {
-    private:
-        PS4Value _ps4Value;
-    public:
-        LowerBody &lowerBody;
-        Solenoid  &solenoid;
-        ForkLift  &forkLift;
-        Hand      &hand;
-        Arm       &arm;
-        PS4USB    &ps4;
+using ForkLift = ConstrainedMServo;
+using Arm = ConstrainedMServo;
 
-        explicit Machine(
-            LowerBody &lowerBody,
-            Solenoid  &solenoid,
-            ForkLift  &forkLift,
-            Hand      &hand,
-            Arm       &arm,
-            PS4USB    &ps4
-        );
+class Machine {
+private:
+    PS4Value _ps4Value;
 
-        Machine(const Machine &) = delete;
-        Machine & operator=(const Machine &) = delete;
-        Machine(Machine&&) = delete;
-        Machine & operator=(Machine&&) = delete;
-        ~Machine() = default;
+public:
+    explicit Machine();
 
-        virtual void begin() noexcept = 0;
-        void update() noexcept;
-        void reset() noexcept;
+    Machine(const Machine &) = delete;
+    Machine &operator=(const Machine &) = delete;
+    Machine(Machine &&) = delete;
+    Machine &operator=(Machine &&) = delete;
+    ~Machine() = default;
 
-        bool isPS4Connected() const noexcept;
-        const PS4Value & currentPS4Value() const noexcept;
-    }; // class Machine
+    virtual void begin() noexcept = 0;
+    void update() noexcept;
+    void reset() noexcept;
+
+    virtual LowerBody *lowerBody_() = 0;
+    virtual Solenoid *solenoid_() = 0;
+    virtual ForkLift *forkLift_() = 0;
+    virtual Hand *hand_() = 0;
+    virtual Arm *arm_() = 0;
+    virtual PS4USB *ps4_() = 0;
+
+    bool isPS4Connected() noexcept;
+    const PS4Value &currentPS4Value() const noexcept;
+}; // class Machine
+
 } // namespace ssr2

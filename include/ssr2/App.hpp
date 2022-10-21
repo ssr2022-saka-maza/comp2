@@ -1,31 +1,30 @@
 #pragma once
 
-#include <Arduino.h>
 #include "ssr2/LimitedVector.hpp"
 #include "ssr2/Machine.hpp"
 #include "ssr2/Process.hpp"
+#include <Arduino.h>
 
 namespace ssr2 {
-    class App {
-    private:
-        Machine *_machine;
-        LimitedVector<Process *, 64> _processes;
 
-    public:
-        explicit App(Machine *machine) noexcept;
+class App {
+private:
+    Machine *_machine;
+    LimitedVector<Process *, 64> _processes;
 
-        App(const App &) = delete;
-        App & operator=(const App &) = delete;
-        App(App&&) = delete;
-        App & operator=(App&&) = delete;
-        ~App() = default;
+public:
+    explicit App(Machine *machine) noexcept;
 
-        void begin() noexcept;
-        void update() noexcept;
+    App(const App &) = delete;
+    App &operator=(const App &) = delete;
+    App(App &&) = delete;
+    App &operator=(App &&) = delete;
+    ~App() = default;
 
-        Machine *machine() noexcept;
-        const Machine *machine() const noexcept;
+    void begin() noexcept;
+    void update() noexcept;
+    Machine *machine() noexcept;
+    void addProcess(Process *process) noexcept;
+}; // class App
 
-        void addProcess(Process *process) noexcept;
-    }; // class App
 } // namespace ssr2

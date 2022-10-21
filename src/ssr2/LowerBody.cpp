@@ -4,11 +4,16 @@ ssr2::LowerBody::LowerBody(
     uint8_t dir1, uint8_t pwm1,
     uint8_t dir2, uint8_t pwm2,
     uint8_t dir3, uint8_t pwm3,
-    uint16_t movAveCapacity
-) : _dir1(cos(PI / 2), sin(PI / 2)), _dir2(cos(PI * 7 / 6), sin(PI * 7 / 6)), _dir3(cos(PI * 11 / 6), sin(PI * 11 / 6)),
-    _motor1(dir1, pwm1), _motor2(dir2, pwm2), _motor3(dir3, pwm3),
-    _moving_average1(movAveCapacity), _moving_average2(movAveCapacity), _moving_average3(movAveCapacity)
-{}
+    uint16_t movAveCapacity)
+    : _dir1(cos(PI / 2), sin(PI / 2)),
+      _dir2(cos(PI * 7 / 6), sin(PI * 7 / 6)),
+      _dir3(cos(PI * 11 / 6), sin(PI * 11 / 6)),
+      _motor1(dir1, pwm1),
+      _motor2(dir2, pwm2),
+      _motor3(dir3, pwm3),
+      _moving_average1(movAveCapacity),
+      _moving_average2(movAveCapacity),
+      _moving_average3(movAveCapacity) {}
 
 void ssr2::LowerBody::begin(float v_x, float v_y, float v_theta) {
     _motor1.begin();
@@ -27,11 +32,11 @@ void ssr2::LowerBody::_setPowers_raw(float v1, float v2, float v3) {
     _motor1.write(p1);
     _motor2.write(p2);
     _motor3.write(p3);
-    #ifdef ssr2_verbose
+#ifdef ssr2_verbose
     char buffer[256] = "";
     snprintf_P(buffer, 255, PSTR("[ssr2::LowerBody] set motor powers as %4d, %4d, %4d\n"), p1, p2, p3);
     Serial.print(buffer);
-    #endif /* ssr2_verbose */
+#endif /* ssr2_verbose */
 }
 
 void ssr2::LowerBody::_setPowers_normalized(float v1, float v2, float v3) {
