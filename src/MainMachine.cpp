@@ -20,6 +20,7 @@ void MainMachine::begin() {
         Serial.println("PS4USB::begin() failed.");
     }
     _lowerBody.begin();
+    _pixels.begin();
 }
 
 ssr2::LowerBody *MainMachine::lowerBody() { return &_lowerBody; }

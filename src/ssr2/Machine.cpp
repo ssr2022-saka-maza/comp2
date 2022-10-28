@@ -8,6 +8,10 @@ void ssr2::Machine::update() noexcept {
     ps4->read(&_ps4Value);
     hand()->update();
     solenoid()->update();
+    Adafruit_NeoPixel *pixels = this->pixels();
+    if (pixels->canShow()) {
+        pixels->show();
+    }
 }
 
 void ssr2::Machine::reset() noexcept {
@@ -15,6 +19,7 @@ void ssr2::Machine::reset() noexcept {
     forkLift()->reset();
     hand()->reset();
     arm()->reset();
+    pixels()->clear();
 }
 
 bool ssr2::Machine::isPS4Connected() noexcept {
