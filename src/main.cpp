@@ -20,14 +20,14 @@ ssr2::App app(&machine);
 
 void setup() {
     Serial.begin(115200);
-    app.addProcess(new proc::PS4Log());
+    // app.addProcess(new proc::PS4Log());
     app.addProcess(new proc::LowerBody());
     proc::Hand *hand = new proc::Hand();
     app.addProcess(hand);
     app.addProcess(new proc::ForkLift());
-    app.addProcess(new proc::Solenoid(hand));
+    // app.addProcess(new proc::Solenoid(hand));
     app.addProcess(new proc::Arm(hand));
-    app.addProcess(new proc::AutoForward());
+    // app.addProcess(new proc::AutoForward());
     app.addProcess(new proc::NeoPixel());
     // app.addProcess(new proc::Systemctl());
     // app.addProcess(new proc::AutoReload());
