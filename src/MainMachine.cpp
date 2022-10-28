@@ -22,14 +22,14 @@ void MainMachine::begin() {
     _lowerBody.begin();
 }
 
-ssr2::LowerBody *MainMachine::lowerBody_() { return &_lowerBody; }
+ssr2::LowerBody *MainMachine::lowerBody() { return &_lowerBody; }
 
-ssr2::Solenoid *MainMachine::solenoid_() { return &_solenoid; }
+ssr2::Solenoid *MainMachine::solenoid() { return &_solenoid; }
 
-ssr2::ForkLift *MainMachine::forkLift_() { return &_forkLift; }
+ssr2::ForkLift *MainMachine::forkLift() { return &_forkLift; }
 
-ssr2::Hand *MainMachine::hand_() { return &_hand; }
+ssr2::Hand *MainMachine::hand() { return &_hand; }
 
-ssr2::Arm *MainMachine::arm_() { return &_arm; }
+ssr2::Arm *MainMachine::arm() { return &_arm; }
 
-ssr2::PS4USB *MainMachine::ps4_() { return &_ps4; }
+ssr2::PS4USB *MainMachine::ps4() { return &_ps4; }

@@ -5,10 +5,10 @@ void proc::ForkLift::begin(ssr2::Machine *machine) {
 }
 
 void proc::ForkLift::update(ssr2::Machine *machine) {
-    ssr2::ForkLift *machineForkLift = machine->forkLift_();
+    ssr2::ForkLift *machineForkLift = machine->forkLift();
     if (machineForkLift == nullptr || machineForkLift == NULL) {
 #ifdef proc_verbose
-        Serial.println(F("[proc::ForkLift] machine->forkLift_ is null"));
+        Serial.println(F("[proc::ForkLift] machine->forkLift is null"));
 #endif /* proc_verbose */
         return;
     }

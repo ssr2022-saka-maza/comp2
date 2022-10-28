@@ -12,10 +12,10 @@ void proc::LowerBody::begin(ssr2::Machine *machine) {
 }
 
 void proc::LowerBody::update(ssr2::Machine *machine) {
-    ssr2::LowerBody *lowerBody = machine->lowerBody_();
+    ssr2::LowerBody *lowerBody = machine->lowerBody();
     if (lowerBody == nullptr || lowerBody == NULL) {
 #ifdef proc_verbose
-        Serial.print("[proc::LowerBody] machine->lowerBody_() is null");
+        Serial.print("[proc::LowerBody] machine->lowerBody() is null");
 #endif /* proc_verbose */
         return;
     }

@@ -47,12 +47,12 @@ uint8_t proc::AutoReload::_update_step_reload(
         return ptr - buffer;
     }
     // get hand
-    ssr2::Hand *hand = machine->hand_();
+    ssr2::Hand *hand = machine->hand();
     if (hand == nullptr || hand == NULL) {
         return ptr - buffer;
     }
     // get arm
-    ssr2::Arm *arm = machine->arm_();
+    ssr2::Arm *arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return ptr - buffer;
     }
@@ -105,12 +105,12 @@ void proc::AutoReload::_update_step_reload(ssr2::Machine *machine,
         _step = Step::init;
     }
     // get hand
-    ssr2::Hand *hand = machine->hand_();
+    ssr2::Hand *hand = machine->hand();
     if (hand == nullptr || hand == NULL) {
         return;
     }
     // get arm
-    ssr2::Arm *arm = machine->arm_();
+    ssr2::Arm *arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return;
     }

@@ -29,12 +29,12 @@ public:
     void update() noexcept;
     void reset() noexcept;
 
-    virtual LowerBody *lowerBody_() = 0;
-    virtual Solenoid *solenoid_() = 0;
-    virtual ForkLift *forkLift_() = 0;
-    virtual Hand *hand_() = 0;
-    virtual Arm *arm_() = 0;
-    virtual PS4USB *ps4_() = 0;
+    virtual LowerBody *lowerBody() = 0;
+    virtual Solenoid *solenoid() = 0;
+    virtual ForkLift *forkLift() = 0;
+    virtual Hand *hand() = 0;
+    virtual Arm *arm() = 0;
+    virtual PS4USB *ps4() = 0;
 
     bool isPS4Connected() noexcept;
     const PS4Value &currentPS4Value() const noexcept;

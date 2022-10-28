@@ -38,26 +38,25 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
 // ソレノイドを発射しない
 #ifdef proc_verbose
         ptr += snprintf_P(ptr, 200, PSTR("do nothing"));
-        goto end;
-#else  /* proc_verbose */
-        return;
+        Serial.println(buffer);
 #endif /* proc_verbose */
+        return;
     }
-    ssr2::Solenoid *machineSolenoid = machine->solenoid_();
+    ssr2::Solenoid *machineSolenoid = machine->solenoid();
     if (machineSolenoid == nullptr || machineSolenoid == NULL) {
 #ifdef proc_verbose
-        Serial.println(F("[proc::Solenoid] machine->solenoid_ is null"));
+        Serial.println(F("[proc::Solenoid] machine->solenoid is null"));
 #endif /* proc_verbose */
         return;
     }
-    ssr2::Arm *machineArm = machine->arm_();
+    ssr2::Arm *machineArm = machine->arm();
     if (machineArm == nullptr || machineArm == NULL) {
 #ifdef proc_verbose
-        Serial.println(F("[proc::Solenoid] machine->arm_ is null"));
+        Serial.println(F("[proc::Solenoid] machine->arm is null"));
 #endif /* proc_verbose */
         return;
     }
-    ssr2::Hand *machineHand = machine->hand_();
+    ssr2::Hand *machineHand = machine->hand();
     if (machineHand == nullptr || machineHand == NULL) {
 #ifdef proc_verbose
         Serial.println(F("[proc::Solenoid] machine->machine_ is null"));
@@ -83,7 +82,6 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
 #endif /* proc_verbose */
     }
 #ifdef proc_verbose
-end:
     Serial.println(buffer);
 #endif /* proc_verbose */
 }

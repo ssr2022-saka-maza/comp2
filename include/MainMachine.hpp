@@ -19,10 +19,10 @@ public:
 
     virtual void begin() noexcept override;
 
-    virtual ssr2::LowerBody *lowerBody_() override;
-    virtual ssr2::Solenoid *solenoid_() override;
-    virtual ssr2::ForkLift *forkLift_() override;
-    virtual ssr2::Hand *hand_() override;
-    virtual ssr2::Arm *arm_() override;
-    virtual ssr2::PS4USB *ps4_() override;
+    virtual ssr2::LowerBody *lowerBody() override;
+    virtual ssr2::Solenoid *solenoid() override;
+    virtual ssr2::ForkLift *forkLift() override;
+    virtual ssr2::Hand *hand() override;
+    virtual ssr2::Arm *arm() override;
+    virtual ssr2::PS4USB *ps4() override;
 };

@@ -13,13 +13,13 @@ void proc::Arm::update(ssr2::Machine *machine) {
     if (d != 0) {
         _dAngle = d;
     }
-    ssr2::Arm *arm = machine->arm_();
+    ssr2::Arm *arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return;
     }
     int16_t angle = arm->read();
     arm->write(angle + _dAngle);
-    ssr2::Hand *machine_hand = machine->hand_();
+    ssr2::Hand *machine_hand = machine->hand();
     if (machine_hand == nullptr || machine_hand == NULL) {
         return;
     }

@@ -47,7 +47,7 @@ uint8_t proc::AutoForward::_update_step_forward(
         return ptr - buffer;
     }
     int64_t dt = millis() - _beginForwardTime;
-    ssr2::LowerBody *lowerBody = machine->lowerBody_();
+    ssr2::LowerBody *lowerBody = machine->lowerBody();
     if (lowerBody == nullptr || lowerBody == NULL) {
         return ptr - buffer;
     }
@@ -93,7 +93,7 @@ void proc::AutoForward::_update_step_forward(ssr2::Machine *machine,
         return;
     }
     int64_t dt = millis() - _beginForwardTime;
-    ssr2::LowerBody *lowerBody = machine->lowerBody_();
+    ssr2::LowerBody *lowerBody = machine->lowerBody();
     if (lowerBody == nullptr || lowerBody == NULL) {
         return;
     }

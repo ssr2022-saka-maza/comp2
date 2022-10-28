@@ -5,10 +5,10 @@ void proc::Hand::begin(ssr2::Machine *machine) {
 }
 
 void proc::Hand::update(ssr2::Machine *machine) {
-    ssr2::Hand *hand = machine->hand_();
+    ssr2::Hand *hand = machine->hand();
     if (hand == nullptr || hand == NULL) {
 #ifdef proc_verbose
-        Serial.println(F("[proc::Hand] machine->hand_ is null"));
+        Serial.println(F("[proc::Hand] machine->hand is null"));
 #endif /* proc_verbose */
         return;
     }
