@@ -8,6 +8,7 @@
 #include <proc/ForkLift.hpp>
 #include <proc/Hand.hpp>
 #include <proc/LowerBody.hpp>
+#include <proc/NeoPixel.hpp>
 #include <proc/PS4Log.hpp>
 #include <proc/Solenoid.hpp>
 #include <proc/Systemctl.hpp>
@@ -27,6 +28,7 @@ void setup() {
     app.addProcess(new proc::Solenoid(hand));
     app.addProcess(new proc::Arm(hand));
     app.addProcess(new proc::AutoForward());
+    app.addProcess(new proc::NeoPixel());
     // app.addProcess(new proc::Systemctl());
     // app.addProcess(new proc::AutoReload());
     app.begin();
