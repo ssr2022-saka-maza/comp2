@@ -1,7 +1,7 @@
 #include "proc/AutoForward.hpp"
 
-proc::AutoForward::AutoForward() noexcept
-    : Process(), _ps4Value(), _step(Step::init), _beginForwardTime(0) {}
+proc::AutoForward::AutoForward() noexcept :
+    Process(), _ps4Value(), _step(Step::init), _beginForwardTime(0) {}
 
 void proc::AutoForward::begin(ssr2::Machine *machine) noexcept {
     status = ssr2::ProcessStatus::running;
@@ -10,7 +10,8 @@ void proc::AutoForward::begin(ssr2::Machine *machine) noexcept {
 
 #ifdef proc_verbose
 
-uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value &value, char *buffer) {
+uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value &value,
+                                             char *buffer) {
     char *ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("init"));
     if (value.options) {
@@ -21,7 +22,8 @@ uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value &value, char *
     return ptr - buffer;
 }
 
-uint8_t proc::AutoForward::_update_step_ready(ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
+uint8_t proc::AutoForward::_update_step_ready(
+    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
     char *ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("ready"));
     machine->reset();
@@ -34,7 +36,8 @@ uint8_t proc::AutoForward::_update_step_ready(ssr2::Machine *machine, const ssr2
     return ptr - buffer;
 }
 
-uint8_t proc::AutoForward::_update_step_forward(ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
+uint8_t proc::AutoForward::_update_step_forward(
+    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
     char *ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("forward"));
     if (_ps4Value != value) {
@@ -72,7 +75,8 @@ void proc::AutoForward::_update_step_init(const ssr2::PS4Value &value) {
     }
 }
 
-void proc::AutoForward::_update_step_ready(ssr2::Machine *machine, const ssr2::PS4Value &value) {
+void proc::AutoForward::_update_step_ready(ssr2::Machine *machine,
+                                           const ssr2::PS4Value &value) {
     machine->reset();
     if (!value.options) {
         _step = Step::forward;
@@ -81,7 +85,8 @@ void proc::AutoForward::_update_step_ready(ssr2::Machine *machine, const ssr2::P
     }
 }
 
-void proc::AutoForward::_update_step_forward(ssr2::Machine *machine, const ssr2::PS4Value &value) {
+void proc::AutoForward::_update_step_forward(ssr2::Machine *machine,
+                                             const ssr2::PS4Value &value) {
     if (_ps4Value != value) {
         status = ssr2::ProcessStatus::running;
         _step = Step::init;

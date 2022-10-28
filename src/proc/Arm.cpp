@@ -1,7 +1,7 @@
 #include "proc/Arm.hpp"
 
-proc::Arm::Arm(Hand *hand, int16_t liftAngle) noexcept
-    : _dAngle(0), _hand(hand), _liftAngle(liftAngle) {}
+proc::Arm::Arm(Hand *hand, int16_t liftAngle) noexcept :
+    _dAngle(0), _hand(hand), _liftAngle(liftAngle) {}
 
 void proc::Arm::begin(ssr2::Machine *machine) {
     status = ssr2::ProcessStatus::running;
@@ -40,7 +40,8 @@ void proc::Arm::update(ssr2::Machine *machine) {
             // 干渉しそう
             machine_hand->write(handAngle - 5);
 #ifdef proc_verbose
-            ptr += snprintf_P(ptr, 200, PSTR(", set hand angle as %d"), handAngle - 5);
+            ptr += snprintf_P(ptr, 200, PSTR(", set hand angle as %d"),
+                              handAngle - 5);
 #endif /* proc_verbose */
         }
     } else {

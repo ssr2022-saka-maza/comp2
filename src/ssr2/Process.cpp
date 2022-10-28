@@ -5,4 +5,5 @@ uint32_t ssr2::Process::_genId() noexcept {
     return id++;
 }
 
-ssr2::Process::Process() noexcept : id(_genId()), status(ssr2::ProcessStatus::stopped) {}
+ssr2::Process::Process() noexcept :
+    id(_genId()), status(ssr2::ProcessStatus::stopped) {}

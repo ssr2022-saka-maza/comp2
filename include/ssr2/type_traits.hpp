@@ -50,9 +50,11 @@ private:
 
 public:
     template <typename T>
-    static auto check(T *t) -> typename enable_if<
-        decltype(check_add(t))::value &&decltype(check_sub(t))::value &&decltype(check_mul(t))::value &&decltype(check_div(t))::value,
-        true_type>::type;
+    static auto check(T *t) ->
+        typename enable_if<decltype(check_add(t))::value &&decltype(check_sub(
+                               t))::value &&decltype(check_mul(t))::value
+                               &&decltype(check_div(t))::value,
+                           true_type>::type;
     template <typename T>
     static false_type check(...);
 };

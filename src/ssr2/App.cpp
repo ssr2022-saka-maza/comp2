@@ -1,7 +1,6 @@
 #include "ssr2/App.hpp"
 
-ssr2::App::App(Machine *machine) noexcept
-    : _machine(machine), _processes() {}
+ssr2::App::App(Machine *machine) noexcept : _machine(machine), _processes() {}
 
 void ssr2::App::begin() noexcept {
     _machine->begin();
@@ -27,7 +26,8 @@ void ssr2::App::update() noexcept {
         for (auto process : priorProcesses) {
             process->update(_machine);
 #ifdef ssr2_verbose
-            ptr += snprintf_P(ptr, 255 - (ptr - buffer), PSTR(" %d"), process->id);
+            ptr +=
+                snprintf_P(ptr, 255 - (ptr - buffer), PSTR(" %d"), process->id);
 #endif /* ssr2_verbose */
         }
     } else {
@@ -35,7 +35,8 @@ void ssr2::App::update() noexcept {
             if (process->status == ProcessStatus::running) {
                 process->update(_machine);
 #ifdef ssr2_verbose
-                ptr += snprintf_P(ptr, 255 - (ptr - buffer), PSTR(" %d"), process->id);
+                ptr += snprintf_P(ptr, 255 - (ptr - buffer), PSTR(" %d"),
+                                  process->id);
 #endif /* ssr2_verbose */
             }
         }
@@ -45,9 +46,7 @@ void ssr2::App::update() noexcept {
 #endif /* ssr2_verbose */
 }
 
-ssr2::Machine *ssr2::App::machine() noexcept {
-    return _machine;
-}
+ssr2::Machine *ssr2::App::machine() noexcept { return _machine; }
 
 void ssr2::App::addProcess(Process *process) noexcept {
     _processes.push_back(process);

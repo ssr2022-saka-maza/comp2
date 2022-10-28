@@ -1,5 +1,9 @@
 BasedOnStyle: LLVM
 AccessModifierOffset: -4
+AlwaysBreakTemplateDeclarations: Yes
 BreakBeforeBraces: Attach
-ColumnLimit: 0
+BreakBeforeBinaryOperators: NonAssignment
+BreakConstructorInitializers: AfterColon
+ColumnLimit: 80
+PenaltyBreakOpenParenthesis: 10
 IndentWidth: 4

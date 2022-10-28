@@ -29,23 +29,19 @@ public:
     }
 
     template <typename U>
-    constexpr auto dot(U vx, U vy) const noexcept
-        -> decltype(x * vx + y * vy) {
+    constexpr auto dot(U vx, U vy) const noexcept -> decltype(x * vx + y * vy) {
         return x * vx + y * vy;
     }
 
-    inline auto angle() const noexcept
-        -> decltype(atan2(y, x)) {
+    inline auto angle() const noexcept -> decltype(atan2(y, x)) {
         return atan2(y, x);
     }
 
-    constexpr auto magSq() const noexcept
-        -> decltype(x * x + y * y) {
+    constexpr auto magSq() const noexcept -> decltype(x * x + y * y) {
         return x * x + y * y;
     }
 
-    inline auto mag() const noexcept
-        -> decltype(sqrt(magSq())) {
+    inline auto mag() const noexcept -> decltype(sqrt(magSq())) {
         return sqrt(magSq());
     }
 }; // class Vector2D
@@ -63,14 +59,16 @@ bool operator!=(const ssr2::Vector2D<T1> &lh, const ssr2::Vector2D<T2> &rh) {
 }
 
 template <typename T1, typename T2>
-ssr2::Vector2D<T1> &operator+=(ssr2::Vector2D<T1> &lh, const ssr2::Vector2D<T2> &rh) {
+ssr2::Vector2D<T1> &operator+=(ssr2::Vector2D<T1> &lh,
+                               const ssr2::Vector2D<T2> &rh) {
     lh.x += rh.x;
     lh.y += rh.y;
     return lh;
 }
 
 template <typename T1, typename T2>
-ssr2::Vector2D<T1> &operator-=(ssr2::Vector2D<T1> &lh, const ssr2::Vector2D<T2> &rh) {
+ssr2::Vector2D<T1> &operator-=(ssr2::Vector2D<T1> &lh,
+                               const ssr2::Vector2D<T2> &rh) {
     lh.x -= rh.x;
     lh.y -= rh.y;
     return lh;

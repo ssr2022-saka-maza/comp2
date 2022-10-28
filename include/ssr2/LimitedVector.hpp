@@ -20,9 +20,7 @@ public:
     LimitedVector(LimitedVector &&) = delete;
     LimitedVector &operator=(LimitedVector &&) = delete;
 
-    ~LimitedVector() {
-        delete[] _data;
-    }
+    ~LimitedVector() { delete[] _data; }
 
     void push_back(const T &value) noexcept {
         if (_size < N) {
@@ -42,44 +40,24 @@ public:
         }
     }
 
-    void clear() noexcept {
-        _size = 0;
-    }
-    T &operator[](uint32_t index) noexcept {
-        return _data[index];
-    }
+    void clear() noexcept { _size = 0; }
 
-    const T &operator[](uint32_t index) const noexcept {
-        return _data[index];
-    }
+    T &operator[](uint32_t index) noexcept { return _data[index]; }
+    const T &operator[](uint32_t index) const noexcept { return _data[index]; }
 
-    uint32_t size() const noexcept {
-        return _size;
-    }
+    uint32_t size() const noexcept { return _size; }
 
-    bool empty() const noexcept {
-        return _size == 0;
-    }
+    bool empty() const noexcept { return _size == 0; }
 
-    bool full() const noexcept {
-        return _size == N;
-    }
+    bool full() const noexcept { return _size == N; }
 
-    T *begin() noexcept {
-        return _data;
-    }
+    T *begin() noexcept { return _data; }
 
-    const T *begin() const noexcept {
-        return _data;
-    }
+    const T *begin() const noexcept { return _data; }
 
-    T *end() noexcept {
-        return _data + _size;
-    }
+    T *end() noexcept { return _data + _size; }
 
-    const T *end() const noexcept {
-        return _data + _size;
-    }
+    const T *end() const noexcept { return _data + _size; }
 }; // class LimitedVector
 
 } // namespace ssr2

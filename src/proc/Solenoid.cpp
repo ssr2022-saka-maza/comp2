@@ -1,6 +1,8 @@
 #include "proc/Solenoid.hpp"
 
-bool proc::Solenoid::_canFire(ssr2::Solenoid *machineSolenoid, ssr2::Arm *machineArm, ssr2::Hand *machineHand) const noexcept {
+bool proc::Solenoid::_canFire(ssr2::Solenoid *machineSolenoid,
+                              ssr2::Arm *machineArm,
+                              ssr2::Hand *machineHand) const noexcept {
     // ソレノイドが発射してから十分に時間が経っているかどうか
     if (machineSolenoid->isFired())
         return false;
@@ -18,7 +20,8 @@ bool proc::Solenoid::_canFire(ssr2::Solenoid *machineSolenoid, ssr2::Arm *machin
     return false;
 }
 
-proc::Solenoid::Solenoid(Hand *hand) noexcept : _hand(hand), _requested(false) {}
+proc::Solenoid::Solenoid(Hand *hand) noexcept :
+    _hand(hand), _requested(false) {}
 
 void proc::Solenoid::begin(ssr2::Machine *machine) {
     status = ssr2::ProcessStatus::running;
@@ -66,7 +69,8 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         _hand->status = ssr2::ProcessStatus::running;
         _requested = false;
 #ifdef proc_verbose
-        ptr += snprintf_P(ptr, 200, PSTR("restart hand process, fire solenoid"));
+        ptr +=
+            snprintf_P(ptr, 200, PSTR("restart hand process, fire solenoid"));
 #endif /* proc_verbose */
     } else {
         // 発射できないので、まずはハンドを開く

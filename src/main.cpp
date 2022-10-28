@@ -19,9 +19,9 @@ class MainMachine : public ssr2::Machine {
     ssr2::PS4USB _ps4;
 
 public:
-    explicit MainMachine()
-        : _lowerBody(6, 7, 4, 5, 2, 3, 64), _solenoid(A8, 100),
-          _forkLift(0, 180), _hand(70, 110), _arm(0, 150), _ps4() {}
+    explicit MainMachine() :
+        _lowerBody(6, 7, 4, 5, 2, 3, 64), _solenoid(A8, 100), _forkLift(0, 180),
+        _hand(70, 110), _arm(0, 150), _ps4() {}
 
     virtual void begin() noexcept override {
         /* PWM frequency */

@@ -7,7 +7,9 @@ namespace ssr2 {
 
 template <typename T>
 class MovingAverage {
-    static_assert(is_arithmetic<T>::value, "template parameter of ssr2::MovingAverage must be arithmetic");
+    static_assert(
+        is_arithmetic<T>::value,
+        "template parameter of ssr2::MovingAverage must be arithmetic");
 
 private:
     uint16_t _index;
@@ -24,14 +26,13 @@ public:
     MovingAverage(MovingAverage &&) = default;
     MovingAverage &operator=(MovingAverage &&) = default;
 
-    explicit MovingAverage(uint16_t capacity)
-        : _index(0), _cycled(false), _values(nullptr), _values_sum(0), capacity(capacity) {
+    explicit MovingAverage(uint16_t capacity) :
+        _index(0), _cycled(false), _values(nullptr), _values_sum(0),
+        capacity(capacity) {
         _values = new T[capacity]{};
     }
 
-    ~MovingAverage() {
-        delete[] _values;
-    }
+    ~MovingAverage() { delete[] _values; }
 
     T read() noexcept {
         if (_index == 0) {

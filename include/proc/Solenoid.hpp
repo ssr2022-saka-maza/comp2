@@ -10,7 +10,8 @@ private:
     Hand *_hand;
     bool _requested;
 
-    bool _canFire(ssr2::Solenoid *machineSolenoid, ssr2::Arm *machineArm, ssr2::Hand *machineHand) const noexcept;
+    bool _canFire(ssr2::Solenoid *machineSolenoid, ssr2::Arm *machineArm,
+                  ssr2::Hand *machineHand) const noexcept;
 
 public:
     Solenoid() = delete;

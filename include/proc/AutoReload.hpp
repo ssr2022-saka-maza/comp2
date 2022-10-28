@@ -16,12 +16,16 @@ private:
 
 #ifdef proc_verbose
     uint8_t _update_step_init(const ssr2::PS4Value &value, char *buffer);
-    uint8_t _update_step_ready(ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer);
-    uint8_t _update_step_reload(ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer);
+    uint8_t _update_step_ready(ssr2::Machine *machine,
+                               const ssr2::PS4Value &value, char *buffer);
+    uint8_t _update_step_reload(ssr2::Machine *machine,
+                                const ssr2::PS4Value &value, char *buffer);
 #else  /* proc_verbose */
     void _update_step_init(const ssr2::PS4Value &value);
-    void _update_step_ready(ssr2::Machine *machine, const ssr2::PS4Value &value);
-    void _update_step_reload(ssr2::Machine *machine, const ssr2::PS4Value &value);
+    void _update_step_ready(ssr2::Machine *machine,
+                            const ssr2::PS4Value &value);
+    void _update_step_reload(ssr2::Machine *machine,
+                             const ssr2::PS4Value &value);
 #endif /* proc_verbose */
 
 public:
