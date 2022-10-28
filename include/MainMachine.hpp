@@ -1,6 +1,9 @@
 #pragma once
 
 #include <Arduino.h>
+
+#include <Adafruit_NeoPixel.h>
+
 #include <ssr2/Hand.hpp>
 #include <ssr2/LowerBody.hpp>
 #include <ssr2/Machine.hpp>
@@ -13,6 +16,7 @@ class MainMachine : public ssr2::Machine {
     ssr2::Hand _hand;
     ssr2::Arm _arm;
     ssr2::PS4USB _ps4;
+    Adafruit_NeoPixel _pixels;
 
 public:
     explicit MainMachine();
@@ -25,4 +29,5 @@ public:
     virtual ssr2::Hand *hand() override;
     virtual ssr2::Arm *arm() override;
     virtual ssr2::PS4USB *ps4() override;
+    virtual Adafruit_NeoPixel *pixels() override;
 };

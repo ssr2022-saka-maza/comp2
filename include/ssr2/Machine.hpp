@@ -1,11 +1,14 @@
 #pragma once
 
+#include <Arduino.h>
+
+#include <Adafruit_NeoPixel.h>
+
 #include "ssr2/ConstrainedMServo.hpp"
 #include "ssr2/Hand.hpp"
 #include "ssr2/LowerBody.hpp"
 #include "ssr2/PS4USB.hpp"
 #include "ssr2/Solenoid.hpp"
-#include <Arduino.h>
 
 namespace ssr2 {
 
@@ -35,6 +38,7 @@ public:
     virtual Hand *hand() = 0;
     virtual Arm *arm() = 0;
     virtual PS4USB *ps4() = 0;
+    virtual Adafruit_NeoPixel *pixels() = 0;
 
     bool isPS4Connected() noexcept;
     const PS4Value &currentPS4Value() const noexcept;

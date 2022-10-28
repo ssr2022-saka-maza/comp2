@@ -2,7 +2,7 @@
 
 MainMachine::MainMachine() :
     _lowerBody(6, 7, 4, 5, 2, 3, 64), _solenoid(A8, 100), _forkLift(0, 180),
-    _hand(70, 110), _arm(0, 150), _ps4() {}
+    _hand(70, 110), _arm(0, 150), _ps4(), _pixels(256, 22 /* or 24 */) {}
 
 void MainMachine::begin() {
     /* PWM frequency */
@@ -33,3 +33,5 @@ ssr2::Hand *MainMachine::hand() { return &_hand; }
 ssr2::Arm *MainMachine::arm() { return &_arm; }
 
 ssr2::PS4USB *MainMachine::ps4() { return &_ps4; }
+
+Adafruit_NeoPixel *MainMachine::pixels() { return &_pixels; }
