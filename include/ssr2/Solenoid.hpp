@@ -18,15 +18,15 @@ public:
 
     Solenoid() = delete;
     Solenoid(const Solenoid &) = delete;
-    Solenoid &operator=(const Solenoid &) = delete;
+    Solenoid & operator=(const Solenoid &) = delete;
     Solenoid(Solenoid &&) = delete;
-    Solenoid &operator=(Solenoid &&) = delete;
+    Solenoid & operator=(Solenoid &&) = delete;
     ~Solenoid() = default;
 
     void begin() noexcept;
     void update() noexcept;
     void fire() noexcept;
     bool isFired() const noexcept;
-}; // class Solenoid
+};  // class Solenoid
 
-} // namespace ssr2
+}  // namespace ssr2

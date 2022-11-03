@@ -13,7 +13,7 @@ public:
     ~AnalogOut() = default;
     void begin();
     void write(uint8_t value);
-    AnalogOut &operator=(uint8_t value);
-}; // class AnalogOut
+    AnalogOut & operator=(uint8_t value);
+};  // class AnalogOut
 
-} // namespace ssr2
+}  // namespace ssr2

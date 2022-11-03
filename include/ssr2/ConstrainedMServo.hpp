@@ -20,6 +20,6 @@ public:
     void write(int16_t angle) noexcept;
     void reset() noexcept;
     int16_t read() noexcept;
-}; // class ConstrainedMServo
+};  // class ConstrainedMServo
 
-} // namespace ssr2
+}  // namespace ssr2

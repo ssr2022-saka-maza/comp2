@@ -13,7 +13,7 @@ public:
     ~DigitalOut() = default;
     void begin();
     void write(bool value);
-    DigitalOut &operator=(bool value);
-}; // class DigitalOut
+    DigitalOut & operator=(bool value);
+};  // class DigitalOut
 
-} // namespace ssr2
+}  // namespace ssr2

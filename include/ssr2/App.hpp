@@ -9,22 +9,22 @@ namespace ssr2 {
 
 class App {
 private:
-    Machine *_machine;
+    Machine * _machine;
     LimitedVector<Process *, 64> _processes;
 
 public:
-    explicit App(Machine *machine) noexcept;
+    explicit App(Machine * machine) noexcept;
 
     App(const App &) = delete;
-    App &operator=(const App &) = delete;
+    App & operator=(const App &) = delete;
     App(App &&) = delete;
-    App &operator=(App &&) = delete;
+    App & operator=(App &&) = delete;
     ~App() = default;
 
     void begin() noexcept;
     void update() noexcept;
-    Machine *machine() noexcept;
-    void addProcess(Process *process) noexcept;
-}; // class App
+    Machine * machine() noexcept;
+    void addProcess(Process * process) noexcept;
+};  // class App
 
-} // namespace ssr2
+}  // namespace ssr2

@@ -14,14 +14,14 @@ public:
     explicit MirrorServo(uint8_t pin1, uint8_t pin2);
 
     MirrorServo(const MirrorServo &) = delete;
-    MirrorServo &operator=(const MirrorServo &) = delete;
+    MirrorServo & operator=(const MirrorServo &) = delete;
     MirrorServo(MirrorServo &&) = delete;
-    MirrorServo &operator=(MirrorServo &&) = delete;
+    MirrorServo & operator=(MirrorServo &&) = delete;
     ~MirrorServo() = default;
 
     uint16_t attach(uint8_t pin1, uint8_t pin2) noexcept;
     void write(int16_t value) noexcept;
     int16_t read() noexcept;
-}; // class MirrorServo
+};  // class MirrorServo
 
-} // namespace ssr2
+}  // namespace ssr2

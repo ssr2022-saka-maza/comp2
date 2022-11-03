@@ -17,7 +17,7 @@ void ssr2::Motor::write(int16_t value) {
 #endif /* ssr2_verbose */
 }
 
-ssr2::Motor &ssr2::Motor::operator=(int16_t value) {
+ssr2::Motor & ssr2::Motor::operator=(int16_t value) {
     write(value);
     return *this;
 }

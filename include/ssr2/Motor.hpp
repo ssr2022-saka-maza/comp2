@@ -16,7 +16,7 @@ public:
     ~Motor() = default;
     void begin();
     void write(int16_t value);
-    Motor &operator=(int16_t value);
-}; // class Motor
+    Motor & operator=(int16_t value);
+};  // class Motor
 
-} // namespace ssr2
+}  // namespace ssr2

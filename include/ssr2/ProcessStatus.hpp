@@ -6,6 +6,6 @@ enum class ProcessStatus : char {
     runningPrior,
     running,
     stopped,
-}; // enum class ProcessStatus
+};  // enum class ProcessStatus
 
-} // namespace ssr2
+}  // namespace ssr2

@@ -28,16 +28,16 @@ public:
     ~PS4USB() = default;
 
     PS4USB(const PS4USB &) = delete;
-    PS4USB &operator=(const PS4USB &) = delete;
+    PS4USB & operator=(const PS4USB &) = delete;
     PS4USB(PS4USB &&) = delete;
-    PS4USB &operator=(PS4USB &&) = delete;
+    PS4USB & operator=(PS4USB &&) = delete;
 
     int begin();
     void update();
     bool connected();
 
-    void read(ssr2::PS4Value *output);
-    PS4Value *read();
-}; // class PS4USB
+    void read(ssr2::PS4Value * output);
+    PS4Value * read();
+};  // class PS4USB
 
-} // namespace ssr2
+}  // namespace ssr2

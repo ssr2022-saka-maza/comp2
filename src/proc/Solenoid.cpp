@@ -1,8 +1,8 @@
 #include "proc/Solenoid.hpp"
 
-bool proc::Solenoid::_canFire(ssr2::Solenoid *machineSolenoid,
-                              ssr2::Arm *machineArm,
-                              ssr2::Hand *machineHand) const noexcept {
+bool proc::Solenoid::_canFire(
+    ssr2::Solenoid * machineSolenoid, ssr2::Arm * machineArm,
+    ssr2::Hand * machineHand) const noexcept {
     // ソレノイドが発射してから十分に時間が経っているかどうか
     if (machineSolenoid->isFired())
         return false;
@@ -20,20 +20,19 @@ bool proc::Solenoid::_canFire(ssr2::Solenoid *machineSolenoid,
     return false;
 }
 
-proc::Solenoid::Solenoid(Hand *hand) noexcept :
-    _hand(hand), _requested(false) {}
+proc::Solenoid::Solenoid(Hand * hand) noexcept : _hand(hand), _requested(false) {}
 
-void proc::Solenoid::begin(ssr2::Machine *machine) {
+void proc::Solenoid::begin(ssr2::Machine * machine) {
     status = ssr2::ProcessStatus::running;
 }
 
-void proc::Solenoid::update(ssr2::Machine *machine) {
+void proc::Solenoid::update(ssr2::Machine * machine) {
 #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr = buffer;
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Solenoid] "));
 #endif /* proc_verbose */
-    const ssr2::PS4Value &value = machine->currentPS4Value();
+    const ssr2::PS4Value & value = machine->currentPS4Value();
     if (!value.circle && !_requested) {
 // ソレノイドを発射しない
 #ifdef proc_verbose
@@ -42,21 +41,21 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
 #endif /* proc_verbose */
         return;
     }
-    ssr2::Solenoid *machineSolenoid = machine->solenoid();
+    ssr2::Solenoid * machineSolenoid = machine->solenoid();
     if (machineSolenoid == nullptr || machineSolenoid == NULL) {
 #ifdef proc_verbose
         Serial.println(F("[proc::Solenoid] machine->solenoid is null"));
 #endif /* proc_verbose */
         return;
     }
-    ssr2::Arm *machineArm = machine->arm();
+    ssr2::Arm * machineArm = machine->arm();
     if (machineArm == nullptr || machineArm == NULL) {
 #ifdef proc_verbose
         Serial.println(F("[proc::Solenoid] machine->arm is null"));
 #endif /* proc_verbose */
         return;
     }
-    ssr2::Hand *machineHand = machine->hand();
+    ssr2::Hand * machineHand = machine->hand();
     if (machineHand == nullptr || machineHand == NULL) {
 #ifdef proc_verbose
         Serial.println(F("[proc::Solenoid] machine->machine_ is null"));
@@ -68,8 +67,7 @@ void proc::Solenoid::update(ssr2::Machine *machine) {
         _hand->status = ssr2::ProcessStatus::running;
         _requested = false;
 #ifdef proc_verbose
-        ptr +=
-            snprintf_P(ptr, 200, PSTR("restart hand process, fire solenoid"));
+        ptr += snprintf_P(ptr, 200, PSTR("restart hand process, fire solenoid"));
 #endif /* proc_verbose */
     } else {
         // 発射できないので、まずはハンドを開く

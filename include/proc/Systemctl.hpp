@@ -6,8 +6,8 @@ namespace proc {
 
 class Systemctl : public ssr2::Process {
 public:
-    virtual void begin(ssr2::Machine *machine) noexcept override;
-    virtual void update(ssr2::Machine *machine) noexcept override;
-}; // class Systemctl
+    virtual void begin(ssr2::Machine * machine) noexcept override;
+    virtual void update(ssr2::Machine * machine) noexcept override;
+};  // class Systemctl
 
-} // namespace proc
+}  // namespace proc

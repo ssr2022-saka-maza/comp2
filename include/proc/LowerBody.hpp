@@ -13,8 +13,8 @@ private:
     static float _mapPower(uint8_t value) noexcept;
 
 public:
-    virtual void begin(ssr2::Machine *machine) override;
-    virtual void update(ssr2::Machine *machine) override;
-}; // class LowerBody
+    virtual void begin(ssr2::Machine * machine) override;
+    virtual void update(ssr2::Machine * machine) override;
+};  // class LowerBody
 
-} // namespace proc
+}  // namespace proc

@@ -4,8 +4,8 @@ namespace proc {
 
 class ForkLift : public ssr2::Process {
 public:
-    virtual void begin(ssr2::Machine *machine) override;
-    virtual void update(ssr2::Machine *machine) override;
-}; // class ForkLift
+    virtual void begin(ssr2::Machine * machine) override;
+    virtual void update(ssr2::Machine * machine) override;
+};  // class ForkLift
 
-} // namespace proc
+}  // namespace proc

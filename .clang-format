@@ -1,9 +1,43 @@
-BasedOnStyle: LLVM
-AccessModifierOffset: -4
+BasedOnStyle: WebKit
+AlignAfterOpenBracket: AlwaysBreak
+AlignArrayOfStructures: Right
+AlignOperands: Align
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortLambdasOnASingleLine: Empty
+AlwaysBreakBeforeMultilineStrings: true
 AlwaysBreakTemplateDeclarations: Yes
+BraceWrapping:
+  AfterCaseLabel:  false
+  AfterClass:      false
+  AfterControlStatement: Never
+  AfterEnum:       false
+  AfterFunction:   false
+  AfterNamespace:  false
+  AfterObjCDeclaration: false
+  AfterStruct:     false
+  AfterUnion:      false
+  AfterExternBlock: false
+  BeforeCatch:     false
+  BeforeElse:      false
+  BeforeLambdaBody: false
+  BeforeWhile:     false
+  IndentBraces:    false
+  SplitEmptyFunction: false
+  SplitEmptyRecord: false
+  SplitEmptyNamespace: false
 BreakBeforeBraces: Attach
-BreakBeforeBinaryOperators: NonAssignment
-BreakConstructorInitializers: AfterColon
-ColumnLimit: 80
-PenaltyBreakOpenParenthesis: 10
-IndentWidth: 4
+BreakConstructorInitializers: BeforeColon
+BreakStringLiterals: false
+ColumnLimit:     100
+PointerAlignment: Middle
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeParensOptions:
+  AfterControlStatements: true
+  AfterForeachMacros: false
+  AfterFunctionDefinitionName: false
+  AfterFunctionDeclarationName: false
+  AfterIfMacros:   true
+  AfterOverloadedOperator: false
+  BeforeNonEmptyParentheses: false
+SpaceInEmptyBlock: false
+SpacesBeforeTrailingComments: 2

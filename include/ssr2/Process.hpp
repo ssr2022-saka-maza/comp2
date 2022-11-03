@@ -15,8 +15,8 @@ public:
 
     explicit Process() noexcept;
 
-    virtual void begin(Machine *machine) = 0;
-    virtual void update(Machine *machine) = 0;
-}; // class Process
+    virtual void begin(Machine * machine) = 0;
+    virtual void update(Machine * machine) = 0;
+};  // class Process
 
-} // namespace ssr2
+}  // namespace ssr2

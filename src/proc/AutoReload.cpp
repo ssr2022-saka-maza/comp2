@@ -1,18 +1,17 @@
 #include "proc/AutoReload.hpp"
 
-proc::AutoReload::AutoReload() noexcept :
-    Process(), _ps4Value(), _step(Step::init), _beginReloadTime(0) {}
+proc::AutoReload::AutoReload() noexcept
+    : Process(), _ps4Value(), _step(Step::init), _beginReloadTime(0) {}
 
-void proc::AutoReload::begin(ssr2::Machine *machine) noexcept {
+void proc::AutoReload::begin(ssr2::Machine * machine) noexcept {
     status = ssr2::ProcessStatus::running;
     _step = Step::init;
 }
 
 #ifdef proc_verbose
 
-uint8_t proc::AutoReload::_update_step_init(const ssr2::PS4Value &value,
-                                            char *buffer) {
-    char *ptr = buffer;
+uint8_t proc::AutoReload::_update_step_init(const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("init"));
     if (value.square) {
         status = ssr2::ProcessStatus::runningPrior;
@@ -23,8 +22,8 @@ uint8_t proc::AutoReload::_update_step_init(const ssr2::PS4Value &value,
 }
 
 uint8_t proc::AutoReload::_update_step_ready(
-    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
-    char *ptr = buffer;
+    ssr2::Machine * machine, const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("ready"));
     machine->reset();
     if (!value.square) {
@@ -37,8 +36,8 @@ uint8_t proc::AutoReload::_update_step_ready(
 }
 
 uint8_t proc::AutoReload::_update_step_reload(
-    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
-    char *ptr = buffer;
+    ssr2::Machine * machine, const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("reload"));
     if (_ps4Value != value) {
         status = ssr2::ProcessStatus::running;
@@ -47,12 +46,12 @@ uint8_t proc::AutoReload::_update_step_reload(
         return ptr - buffer;
     }
     // get hand
-    ssr2::Hand *hand = machine->hand();
+    ssr2::Hand * hand = machine->hand();
     if (hand == nullptr || hand == NULL) {
         return ptr - buffer;
     }
     // get arm
-    ssr2::Arm *arm = machine->arm();
+    ssr2::Arm * arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return ptr - buffer;
     }
@@ -81,15 +80,14 @@ uint8_t proc::AutoReload::_update_step_reload(
 
 #else /* proc_verbose */
 
-void proc::AutoReload::_update_step_init(const ssr2::PS4Value &value) {
+void proc::AutoReload::_update_step_init(const ssr2::PS4Value & value) {
     if (value.square) {
         status = ssr2::ProcessStatus::runningPrior;
         _step = Step::ready;
     }
 }
 
-void proc::AutoReload::_update_step_ready(ssr2::Machine *machine,
-                                          const ssr2::PS4Value &value) {
+void proc::AutoReload::_update_step_ready(ssr2::Machine * machine, const ssr2::PS4Value & value) {
     machine->reset();
     if (!value.square) {
         _step = Step::reload;
@@ -98,19 +96,18 @@ void proc::AutoReload::_update_step_ready(ssr2::Machine *machine,
     }
 }
 
-void proc::AutoReload::_update_step_reload(ssr2::Machine *machine,
-                                           const ssr2::PS4Value &value) {
+void proc::AutoReload::_update_step_reload(ssr2::Machine * machine, const ssr2::PS4Value & value) {
     if (_ps4Value != value) {
         status = ssr2::ProcessStatus::running;
         _step = Step::init;
     }
     // get hand
-    ssr2::Hand *hand = machine->hand();
+    ssr2::Hand * hand = machine->hand();
     if (hand == nullptr || hand == NULL) {
         return;
     }
     // get arm
-    ssr2::Arm *arm = machine->arm();
+    ssr2::Arm * arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return;
     }
@@ -134,11 +131,11 @@ void proc::AutoReload::_update_step_reload(ssr2::Machine *machine,
 
 #endif /* proc_verbose */
 
-void proc::AutoReload::update(ssr2::Machine *machine) noexcept {
-    const ssr2::PS4Value &value = machine->currentPS4Value();
+void proc::AutoReload::update(ssr2::Machine * machine) noexcept {
+    const ssr2::PS4Value & value = machine->currentPS4Value();
 #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr = buffer;
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::AutoReload] step is "));
     switch (_step) {
     case Step::init:
@@ -149,10 +146,10 @@ void proc::AutoReload::update(ssr2::Machine *machine) noexcept {
         break;
     case Step::reload:
         ptr += _update_step_reload(machine, value, ptr);
-        break; // Step::reload
+        break;  // Step::reload
     }
     Serial.println(buffer);
-#else  /* proc_verbose */
+#else /* proc_verbose */
     switch (_step) {
     case Step::init:
         _update_step_init(value);
@@ -162,7 +159,7 @@ void proc::AutoReload::update(ssr2::Machine *machine) noexcept {
         break;
     case Step::reload:
         _update_step_reload(machine, value);
-        break; // Step::reload
+        break;  // Step::reload
     }
 #endif /* proc_verbose */
 }

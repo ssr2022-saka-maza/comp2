@@ -1,18 +1,17 @@
 #include "proc/AutoForward.hpp"
 
-proc::AutoForward::AutoForward() noexcept :
-    Process(), _ps4Value(), _step(Step::init), _beginForwardTime(0) {}
+proc::AutoForward::AutoForward() noexcept
+    : Process(), _ps4Value(), _step(Step::init), _beginForwardTime(0) {}
 
-void proc::AutoForward::begin(ssr2::Machine *machine) noexcept {
+void proc::AutoForward::begin(ssr2::Machine * machine) noexcept {
     status = ssr2::ProcessStatus::running;
     _step = Step::init;
 }
 
 #ifdef proc_verbose
 
-uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value &value,
-                                             char *buffer) {
-    char *ptr = buffer;
+uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("init"));
     if (value.options) {
         status = ssr2::ProcessStatus::runningPrior;
@@ -23,8 +22,8 @@ uint8_t proc::AutoForward::_update_step_init(const ssr2::PS4Value &value,
 }
 
 uint8_t proc::AutoForward::_update_step_ready(
-    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
-    char *ptr = buffer;
+    ssr2::Machine * machine, const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("ready"));
     machine->reset();
     if (!value.options) {
@@ -37,8 +36,8 @@ uint8_t proc::AutoForward::_update_step_ready(
 }
 
 uint8_t proc::AutoForward::_update_step_forward(
-    ssr2::Machine *machine, const ssr2::PS4Value &value, char *buffer) {
-    char *ptr = buffer;
+    ssr2::Machine * machine, const ssr2::PS4Value & value, char * buffer) {
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("forward"));
     if (_ps4Value != value) {
         status = ssr2::ProcessStatus::running;
@@ -47,7 +46,7 @@ uint8_t proc::AutoForward::_update_step_forward(
         return ptr - buffer;
     }
     int64_t dt = millis() - _beginForwardTime;
-    ssr2::LowerBody *lowerBody = machine->lowerBody();
+    ssr2::LowerBody * lowerBody = machine->lowerBody();
     if (lowerBody == nullptr || lowerBody == NULL) {
         return ptr - buffer;
     }
@@ -68,15 +67,14 @@ uint8_t proc::AutoForward::_update_step_forward(
 
 #else /* proc_verbose */
 
-void proc::AutoForward::_update_step_init(const ssr2::PS4Value &value) {
+void proc::AutoForward::_update_step_init(const ssr2::PS4Value & value) {
     if (value.options) {
         status = ssr2::ProcessStatus::runningPrior;
         _step = Step::ready;
     }
 }
 
-void proc::AutoForward::_update_step_ready(ssr2::Machine *machine,
-                                           const ssr2::PS4Value &value) {
+void proc::AutoForward::_update_step_ready(ssr2::Machine * machine, const ssr2::PS4Value & value) {
     machine->reset();
     if (!value.options) {
         _step = Step::forward;
@@ -85,15 +83,15 @@ void proc::AutoForward::_update_step_ready(ssr2::Machine *machine,
     }
 }
 
-void proc::AutoForward::_update_step_forward(ssr2::Machine *machine,
-                                             const ssr2::PS4Value &value) {
+void proc::AutoForward::_update_step_forward(
+    ssr2::Machine * machine, const ssr2::PS4Value & value) {
     if (_ps4Value != value) {
         status = ssr2::ProcessStatus::running;
         _step = Step::init;
         return;
     }
     int64_t dt = millis() - _beginForwardTime;
-    ssr2::LowerBody *lowerBody = machine->lowerBody();
+    ssr2::LowerBody * lowerBody = machine->lowerBody();
     if (lowerBody == nullptr || lowerBody == NULL) {
         return;
     }
@@ -110,11 +108,11 @@ void proc::AutoForward::_update_step_forward(ssr2::Machine *machine,
 
 #endif /* proc_verbose */
 
-void proc::AutoForward::update(ssr2::Machine *machine) noexcept {
-    const ssr2::PS4Value &value = machine->currentPS4Value();
+void proc::AutoForward::update(ssr2::Machine * machine) noexcept {
+    const ssr2::PS4Value & value = machine->currentPS4Value();
 #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr = buffer;
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::AutoForward] step is "));
     switch (_step) {
     case Step::init:
@@ -128,7 +126,7 @@ void proc::AutoForward::update(ssr2::Machine *machine) noexcept {
         break;
     }
     Serial.println(buffer);
-#else  /* proc_verbose */
+#else /* proc_verbose */
     switch (_step) {
     case Step::init:
         _update_step_init(value);

@@ -23,25 +23,25 @@ public:
     explicit Machine();
 
     Machine(const Machine &) = delete;
-    Machine &operator=(const Machine &) = delete;
+    Machine & operator=(const Machine &) = delete;
     Machine(Machine &&) = delete;
-    Machine &operator=(Machine &&) = delete;
+    Machine & operator=(Machine &&) = delete;
     ~Machine() = default;
 
     virtual void begin() noexcept = 0;
     void update() noexcept;
     void reset() noexcept;
 
-    virtual LowerBody *lowerBody() = 0;
-    virtual Solenoid *solenoid() = 0;
-    virtual ForkLift *forkLift() = 0;
-    virtual Hand *hand() = 0;
-    virtual Arm *arm() = 0;
-    virtual PS4USB *ps4() = 0;
-    virtual Adafruit_NeoPixel *pixels() = 0;
+    virtual LowerBody * lowerBody() = 0;
+    virtual Solenoid * solenoid() = 0;
+    virtual ForkLift * forkLift() = 0;
+    virtual Hand * hand() = 0;
+    virtual Arm * arm() = 0;
+    virtual PS4USB * ps4() = 0;
+    virtual Adafruit_NeoPixel * pixels() = 0;
 
     bool isPS4Connected() noexcept;
-    const PS4Value &currentPS4Value() const noexcept;
-}; // class Machine
+    const PS4Value & currentPS4Value() const noexcept;
+};  // class Machine
 
-} // namespace ssr2
+}  // namespace ssr2

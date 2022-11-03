@@ -19,14 +19,14 @@ private:
 public:
     LowerBody() = delete;
     LowerBody(const LowerBody &) = delete;
-    LowerBody &operator=(const LowerBody &) = delete;
+    LowerBody & operator=(const LowerBody &) = delete;
     LowerBody(LowerBody &&) = delete;
-    LowerBody &operator=(LowerBody &&) = delete;
+    LowerBody & operator=(LowerBody &&) = delete;
     ~LowerBody() = default;
 
-    explicit LowerBody(uint8_t dir1, uint8_t pwm1, uint8_t dir2, uint8_t pwm2,
-                       uint8_t dir3, uint8_t pwm3,
-                       uint16_t movAveCapacity = 32);
+    explicit LowerBody(
+        uint8_t dir1, uint8_t pwm1, uint8_t dir2, uint8_t pwm2, uint8_t dir3, uint8_t pwm3,
+        uint16_t movAveCapacity = 32);
 
     /**
      * @note
@@ -65,6 +65,6 @@ public:
     void twist(float v_x, float v_y, float v_theta) noexcept;
     inline void parallel(float v_x, float v_y) noexcept;
     inline void rotate(float v_theta) noexcept;
-}; // class LowerBody
+};  // class LowerBody
 
-} // namespace ssr2
+}  // namespace ssr2

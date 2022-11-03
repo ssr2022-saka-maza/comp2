@@ -14,6 +14,6 @@ public:
     int16_t read() noexcept;
     void begin(int16_t angle = 0) noexcept;
     void update() noexcept;
-}; // class Hand
+};  // class Hand
 
-} // namespace ssr2
+}  // namespace ssr2

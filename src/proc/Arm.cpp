@@ -1,31 +1,31 @@
 #include "proc/Arm.hpp"
 
-proc::Arm::Arm(Hand *hand, int16_t liftAngle) noexcept :
-    _dAngle(0), _hand(hand), _liftAngle(liftAngle) {}
+proc::Arm::Arm(Hand * hand, int16_t liftAngle) noexcept
+    : _dAngle(0), _hand(hand), _liftAngle(liftAngle) {}
 
-void proc::Arm::begin(ssr2::Machine *machine) {
+void proc::Arm::begin(ssr2::Machine * machine) {
     status = ssr2::ProcessStatus::running;
 }
 
-void proc::Arm::update(ssr2::Machine *machine) {
-    const ssr2::PS4Value &value = machine->currentPS4Value();
+void proc::Arm::update(ssr2::Machine * machine) {
+    const ssr2::PS4Value & value = machine->currentPS4Value();
     int16_t d = value.triangle - value.cross;
     if (d != 0) {
         _dAngle = d;
     }
-    ssr2::Arm *arm = machine->arm();
+    ssr2::Arm * arm = machine->arm();
     if (arm == nullptr || arm == NULL) {
         return;
     }
     int16_t angle = arm->read();
     arm->write(angle + _dAngle);
-    ssr2::Hand *machine_hand = machine->hand();
+    ssr2::Hand * machine_hand = machine->hand();
     if (machine_hand == nullptr || machine_hand == NULL) {
         return;
     }
 #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr = buffer;
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Arm] set angle as %d"), angle);
 #endif /* proc_verbose */
     // ハンドの干渉チェック
@@ -40,8 +40,7 @@ void proc::Arm::update(ssr2::Machine *machine) {
             // 干渉しそう
             machine_hand->write(handAngle - 5);
 #ifdef proc_verbose
-            ptr += snprintf_P(ptr, 200, PSTR(", set hand angle as %d"),
-                              handAngle - 5);
+            ptr += snprintf_P(ptr, 200, PSTR(", set hand angle as %d"), handAngle - 5);
 #endif /* proc_verbose */
         }
     } else {

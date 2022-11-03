@@ -1,7 +1,7 @@
 #include "ssr2/Solenoid.hpp"
 
-ssr2::Solenoid::Solenoid(uint8_t pin, uint16_t duration) :
-    _pin(pin), _fired(false), _lastFiredTime(0), duration(duration) {}
+ssr2::Solenoid::Solenoid(uint8_t pin, uint16_t duration)
+    : _pin(pin), _fired(false), _lastFiredTime(0), duration(duration) {}
 
 void ssr2::Solenoid::begin() noexcept {
     _pin.begin();
@@ -30,4 +30,6 @@ void ssr2::Solenoid::fire() noexcept {
 #endif /* ssr2_verbose */
 }
 
-bool ssr2::Solenoid::isFired() const noexcept { return _fired; }
+bool ssr2::Solenoid::isFired() const noexcept {
+    return _fired;
+}

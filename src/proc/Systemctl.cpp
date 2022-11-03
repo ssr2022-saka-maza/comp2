@@ -1,13 +1,13 @@
 #include "proc/Systemctl.hpp"
 
-void proc::Systemctl::begin(ssr2::Machine *machine) noexcept {
+void proc::Systemctl::begin(ssr2::Machine * machine) noexcept {
     status = ssr2::ProcessStatus::running;
 }
 
-void proc::Systemctl::update(ssr2::Machine *machine) noexcept {
+void proc::Systemctl::update(ssr2::Machine * machine) noexcept {
 #ifdef proc_verbose
     char buffer[256] = "";
-    char *ptr = buffer;
+    char * ptr = buffer;
     ptr += snprintf_P(ptr, 200, PSTR("[proc::Systemctl] "));
 #endif /* proc_verbose */
     if (machine->currentPS4Value().ps) {
